@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-size: 1vw;
+            font-family: sans-serif;
+            color: white;
+        }
+        body{
+            background-color: rgb(12,17,27);
+        }
+        nav{
+            width: 90vw;
+            margin: auto;
+            /* border: 1px solid white; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5vh;
+        }
+        nav>div>ol{
+            width: 35vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav>div>ol>li{
+          list-style: none;
+          color: white;
+
+        }
+        #image{
+            width: 7vw;
+        }
+
+        nav>div>ol>li:hover {
+          color: yellow;
+
+        }
+        nav>div+div{
+            width: 24vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav>div+div input{
+            outline: none;
+            border: none;
+            border-bottom: 1px solid white;
+            background: transparent;
+            padding: 1vh;
+            color: white;
+        }
+        nav>div+div button{
+            background-color: rgb(31,128,224);
+            color: white;
+            text-transform: uppercase;
+            padding: .3vh 1vh;
+            border-radius: 5px;
+            font-size: .8vw;
+            font-weight: 700;
+        }
+        nav>div+div p{
+            color: white;
+            font-size: .8vw;
+            color: rgb(184, 180, 180);
+            font-weight: 700;
+        }
+        .slide{
+            width: 90vw;
+            display: flex;
+            overflow: hidden;
+            border-radius: 7px;
+            margin: auto;
+            height: 50vh;
+            margin-top: 3vh;
+        }
+        #slide_box{
+            display: flex;
+            transition: 1s;
+        }
+        #slide_box >img{
+            width: 90vw;
+            height: 100%;
+        }
+        .leftbutton{
+            font-size: 3vw;
+            color: white;
+            position: absolute;
+            top: 30vh;
+            left: 5vh;
+        }
+        .rightbutton{
+            font-size: 3vw;
+            color: white;
+            position: absolute;
+            top: 30vh;
+            left: 96vw;
+        }
+        #box{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 1vw;
+            line-height: 3.5vh;
+            margin-top: 4vh;
+        }
+        #box > div{
+            text-align: center;
+            margin: auto;
+            /* border: 1px solid #cecece; */
+            width: 22vw;
+        }
+        .error{
+            width: 90vw;
+            height: 50vh;
+            margin-left: 5vw;
+        }
+        .searchresult{
+            display: block;
+            border: 1px solid #cecece;
+            height: 8vh !important;
+            overflow-y: scroll;
+            position: absolute;
+            top: 6vh;
+            left: 69vw;
+            z-index: 10;
+        }
+        .hideresult{
+            display: none;
+        }
+    </style>
+</head>
+<!-- onload="slide()" -->
+
+<body onload="slide()">
+    <nav>
+        <div>
+        <ol>
+            <li> <a href="https://www.hotstar.com/in" target="_main"><img id="image" src="https://secure-media.hotstarext.com/web-assets/prod/images/brand-logos/disney-hotstar-logo-dark.svg" alt=""></a></li>
+            <li>Tv</li>
+            <li>Movies</li>
+            <li>Sports</li>
+            <li>Disney+</li>
+            <li style="color: yellow;font-weight: 700;">KiDS</li>
+        </ol>
+        </div>    
+        <div>
+            <div>
+                <div><input type="text"  placeholder="Search  🔍" id="inp" oninput="deb()"></div>
+                <div >
+                    <div id="searchresult"></div>
+                </div>
+            </div>
+            <button onclick="fech()" >Search</button>
+            <!-- <button >Subscribe</button> -->
+            <p><a href="imdbsignin.html" style="text-decoration: none;">LOGIN</a></p>
+        </div>
+    </nav>
+    <div class="slide">
+      <div id="slide_box">
+        <img src="https://shifu.hotstarext.com/SOURCE/VOD/cd-2022-03-23/20220322_IPL_Gen_1170x362_Set1-d9d0849f-287f-4859-b188-f577b088dc4d.jpg" alt="">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/2460/1092460-h-1d7e0b4d3292" alt="">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/2260/1192260-h-92e95f65d495" alt="">
+      </div>
+    </div>
+    <div class="leftbutton" onclick="slide_left()">‹</div>
+    <div class="rightbutton" onclick="slide_right()">›</div>
+    <div id="box"></div>
+</body>
+<script>
+    var a=1
+
+    var image=document.getElementById("slide_box")
+
+
+    const slide = () => {
+        if (a === 1) {
+            image.style.transform = "translateX(0vw)"
+            a = 2
+            setTimeout('slide()', 6000);
+        } else if (a === 2) {
+            image.style.transform = "translateX(-90vw)"
+            a = 3
+            setTimeout('slide()', 6000);
+        } else if (a === 3) {
+            image.style.transform = "translateX(-180vw)"
+            a = 1
+            setTimeout('slide()', 6000);
+        } 
+    }
+
+    const slide_left=()=>{
+        if (a === 1) {
+            image.style.transform = "translateX(0vw)"
+            a = 2
+        } else if (a === 2) {
+            image.style.transform = "translateX(-90vw)"
+            a = 3
+        } else if (a === 3) {
+            image.style.transform = "translateX(-180vw)"
+            a = 1
+        } 
+    }
+
+    const slide_right=()=>{
+        // if (a === 1) {
+        //     document.getElementById("slide_box").style.transform = "translateX(90vw)"
+        //     a = 1
+        //     console.log(a)
+        // } 
+        // else if (a === 2) {
+        //     image.style.transform = "translateX(90vw)"
+        //     a = 1
+        // } else if (a === 3) {
+        //     image.style.transform = "translateX(0vw)"
+        //     a = 2
+        // } 
+    }
+    const fech=()=>{
+
+        var value=document.getElementById("inp").value
+        fetch(`http://www.omdbapi.com/?s=${value}&apikey=db566529`)
+            .then((res) => {
+                res.json().then((res) => {
+                    list(res.Search)
+                    if(res.Search.length >0){
+                    display(res.Search)
+                    }
+                    // console.log(res.Search)
+                })
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const display=(movies)=>{
+    var box=document.getElementById("box")
+    box.innerHTML=null
+    console.log(movies)
+if( movies === undefined){
+var im=document.createElement("img")
+im.src=`https://tse3.mm.bing.net/th?id=OIP.fOGEoiVkdWxlfg2jzLusfgHaDn&pid=Api&P=0&w=327&h=159`
+im.setAttribute("class","error")
+var er=document.createElement("h1")
+    // er.innerText=`Nothing to Show`
+box.append(im)
+}else{
+    movies.forEach((ele) => {
+    // console.log(ele.Poster)
+    var div=document.createElement("div")
+ 
+ var image=document.createElement("img")
+ image.src=ele.Poster
+
+ var title=document.createElement("h1")
+ title.innerText= 'Title:  '+ele.Title
+
+ var type=document.createElement("h2")
+ type.innerText='Type:  '+ ele.Type
+
+ var year=document.createElement("h3")
+ year.innerText= 'Year:  ' +ele.Year
+
+
+ div.append(image,title,type,year)
+ box.append(div)
+});
+setTimeout("clear()",5000)
+
+}
+}
+
+let x;
+const deb=()=>{
+    if(x){
+        clearTimeout(x)
+    }
+    x=setTimeout("fech()",2000)
+}
+
+let searchresult=document.getElementById("searchresult")
+const  list=(res)=>{
+    searchresult.innerHTML=``
+    if(res.length > 0){
+        for(var i=0; i<res.length; i++){
+        console.log(res[i])
+        let p= document.createElement("p")
+    p.innerHTML=res[i].Title
+    searchresult.append(p)
+    }
+    searchresult.setAttribute("class","searchresult")
+    console.log(res)
+    }
+}
+const clear = () =>{
+    console.log(1)
+    // document.getElementById("searchresult").innerHTML=``
+    document.getElementById('inp').innerHTML=``
+    document.getElementById('inp').value=``
+    searchresult.setAttribute("class","hideresult")
+    searchresult.innerHTML=''
+}
+</script>
+</html>
